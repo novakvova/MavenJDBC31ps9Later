@@ -1,0 +1,5 @@
+CREATE DATABASE petrovnadb;
+
+CREATE USER 'alkash'@'localhost' IDENTIFIED BY 'Qwerty1-';
+
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, INDEX, DROP, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES ON petrovnadb.* TO 'alkash'@'localhost';
