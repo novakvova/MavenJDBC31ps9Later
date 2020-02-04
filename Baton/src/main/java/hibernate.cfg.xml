@@ -28,6 +28,9 @@
 
 		<!-- Annotated entity classes -->
 		<mapping class="entities.Bottle" />
+		
+		<mapping class="entities.Student" />
+		<mapping class="entities.MarksDetail" />
 
 	</session-factory>
 

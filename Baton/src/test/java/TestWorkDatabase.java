@@ -1,4 +1,6 @@
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -9,6 +11,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import entities.Bottle;
+import entities.MarksDetail;
+import entities.Student;
 
 public class TestWorkDatabase {
 	@Test
@@ -24,11 +28,39 @@ public class TestWorkDatabase {
         //запускаем тест, в случае если список expected и actual не будут равны
         //тест будет провален, о результатах теста читаем в консоли
         
+        
+        session.beginTransaction();
+        
+        Student studentObj = new Student("Java", "Geek",  "javageek@javacodegeeks.com", "0123456789");
+        session.save(studentObj);
+
+        //Set<MarksDetail> itemsSet = new HashSet<MarksDetail>();
+        
+        MarksDetail marksObj1 = new MarksDetail("English", "100", "90",  "Pass");  
+        marksObj1.setStudent(studentObj);
+        session.save(marksObj1);
+        
+        MarksDetail marksObj2 = new MarksDetail("Maths", "100", "99",  "Pass");  
+        marksObj2.setStudent(studentObj);
+        session.save(marksObj2);
+
+        MarksDetail marksObj3 = new MarksDetail("Science", "100", "94",  "Pass");  
+        marksObj3.setStudent(studentObj);
+        session.save(marksObj3);
+        // Committing The Transactions To The Database
+        session.getTransaction().commit();
+
+        
+        
         create(session);
         create(session);
         create(session);
         long count= count(session);
         Assert.assertEquals(count, 3);
+        
+        
+        
+        
         
         session.close();
 	}
